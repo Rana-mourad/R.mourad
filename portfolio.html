@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rana Elamir Mourad | Operations Manager & BI Specialist</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #14b8a6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg {
+            background-color: #0f172a;
+            background-image: radial-gradient(#1e293b 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- DATA OBJECT ---
+        const portfolioData = {
+            profile: {
+                name: "Rana Elamir Mourad",
+                title: "Operations Manager | Business Intelligence & CRM Specialist",
+                location: "El Sharqiyah, Egypt",
+                email: "rana.elamir.mourad@gmail.com",
+                phone: "01093765969",
+                about: "I am an Operations Manager with expertise in CRM, lifecycle operations, and data-driven marketing. I combine operational leadership with hands-on experience in customer segmentation, campaign automation, and digital project management. My work spans developing lifecycle funnels, managing email automation platforms, coordinating live events, and implementing data-driven solutions to drive engagement, operational efficiency, and measurable results."
+            },
+            skills: {
+                technical: ["Power BI", "Excel", "Python (Pandas, NumPy)", "Tableau", "SQL", "Data Modeling", "ETL", "Azure", "Project Management Tools", "Digital Strategy"],
+                soft: ["Analytical Thinking", "Problem-Solving", "Communication", "Process Improvement", "Collaboration", "Innovation", "Project Leadership", "Stakeholder Engagement"],
+                languages: ["English (Fluent)", "Arabic (Native)"]
+            },
+            experience: [
+                {
+                    role: "Operations Manager",
+                    company: "TebZone",
+                    location: "Egypt",
+                    period: "July 2025 – Present",
+                    description: "Leading CRM operations, platform development, and clinical education projects.",
+                    highlights: [
+                        "Owned CRM operations and customer data architecture; built segmentation logic, automated funnels, and personalized messaging.",
+                        "Executed end-to-end email campaigns achieving a 40% sales increase for the White Coat Bundle.",
+                        "Directed the MAHER platform development contributing to 70% of project progress.",
+                        "Created and developed two clinical mini-courses in Cardiology and Neurology.",
+                        "Reduced customer support resolution time by 25% through workflow optimization."
+                    ]
+                },
+                {
+                    role: "Freelance Research & Program Evaluation",
+                    company: "National Center for Mental Health Promotion",
+                    location: "KSA",
+                    period: "March 2025 – April 2025",
+                    description: "Conducted desk research and data collection for national assessment programs.",
+                    highlights: [
+                        "Designed surveys using Google Forms and Excel to improve data reliability.",
+                        "Drafted outreach communications to 15+ institutions.",
+                        "Built focus group frameworks and mapped 30+ programs to identify gaps."
+                    ]
+                },
+                {
+                    role: "Entrepreneurial Experience",
+                    company: "Anoush.AI",
+                    location: "Egypt",
+                    period: "Jan 2024 – Mar 2025",
+                    description: "Founded and developed an AI-powered skincare product.",
+                    highlights: [
+                        "Led research, market analysis, and feature prioritization.",
+                        "Conducted user research (50+ users) and competitor benchmarking.",
+                        "Created user personas and product roadmap to guide development."
+                    ]
+                },
+                {
+                    role: "Project Manager Intern",
+                    company: "Excelerate",
+                    location: "Dubai, UAE",
+                    period: "Aug 2024 – Oct 2024",
+                    description: "Managed global events and quality control frameworks.",
+                    highlights: [
+                        "Delivered a global event within a $10,000 budget, achieving 100% on-time completion.",
+                        "Developed a quality control framework improving task efficiency by 20%.",
+                        "Used Agile tools (Kanban) to monitor 25+ project milestones."
+                    ]
+                },
+                {
+                    role: "Social Media Marketing Intern",
+                    company: "HookZApp",
+                    location: "London, UK",
+                    period: "Nov 2022 – Jun 2023",
+                    description: "Managed social media channels and content strategy.",
+                    highlights: [
+                        "Increased engagement by 30% for Egypt and Dubai accounts.",
+                        "Optimized content strategy resulting in 25% follower growth."
+                    ]
+                }
+            ],
+            education: [
+                {
+                    degree: "Master’s Degree – Medicinal Chemistry",
+                    school: "Mansoura University",
+                    year: "2024 – Present"
+                },
+                {
+                    degree: "Bachelor’s Degree – Pharmacy",
+                    school: "Modern Sciences and Arts University",
+                    year: "2018 – 2023"
+                }
+            ],
+            projects: [
+                {
+                    title: "White Coat Bundle Lifecycle Campaign",
+                    category: "CRM & Marketing",
+                    goal: "Boost sales and engagement through targeted CRM campaigns.",
+                    action: "Built segmentation, personalized HTML emails, automated funnels, and tracked performance.",
+                    outcome: "40% sales increase, 30% conversion from CRM leads."
+                },
+                {
+                    title: "MAHER Platform Development",
+                    category: "Product Management",
+                    goal: "Launch AI assistant  platform for doctors ",
+                    action: "End-to-end project management, content strategy, technical testing.",
+                    outcome: "70% project completion led, ready for release."
+                },
+                {
+                    title: "Clinical Secret",
+                    category: "Education Ops",
+                    goal: "Develop two mini-courses in Cardiology and Neurology under clinical secret.",
+                    action: "Concept-to-production planning, agreements with specialists, course content design.",
+                    outcome: "Scheduled for Q1 launch."
+                },
+                {
+                    title: "Analytics Dashboards for small businesses",
+                    category: "Business Intelligence",
+                    goal: "Track platform performance and user engagement.",
+                    action: "Used SQL and Excel for data modeling. Built Power BI dashboards.",
+                    outcome: "Actionable visualization for stakeholders."
+                }
+            ],
+            certifications: [
+                "Power BI Engineering – DEPI (2025)",
+                "IBM Data Science Professional Certificate (2024)",
+                "Google Project Management – In Progress",
+                "PMP Preparation Course – BIM Arabia (2024)",
+                "Flutter Development – UN Women (2023)",
+                "Digital Marketing Nanodegree – Udacity (2020)"
+            ],
+            awards: [
+                "Founder Academy & Heya Raeda – Pitched Anoush.AI (2024)",
+                "Top 50 Trainees – Akhnaton Trading (2023)",
+                "Public Health Campaign Contributor – EPSF (2020)"
+            ]
+        };
+
+        // --- COMPONENTS ---
+        const Nav = () => {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileOpen, setMobileOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const navLinks = [
+                { name: 'About', href: '#about' },
+                { name: 'Skills', href: '#skills' },
+                { name: 'Experience', href: '#experience' },
+                { name: 'Projects', href: '#projects' },
+                { name: 'Education', href: '#education' },
+            ];
+
+            return (
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-900/95 backdrop-blur shadow-lg py-3' : 'bg-transparent py-5'}`}>
+                    <div className="container mx-auto px-6 flex justify-between items-center text-white">
+                        <a href="#" className="text-xl font-bold tracking-tight">
+                            R<span className="text-teal-400">.</span>Mourad
+                        </a>
+                        
+                        {/* Desktop Nav */}
+                        <div className="hidden md:flex space-x-8">
+                            {navLinks.map((link) => (
+                                <a key={link.name} href={link.href} className="text-sm font-medium hover:text-teal-400 transition-colors">
+                                    {link.name}
+                                </a>
+                            ))}
+                            <a href={`mailto:${portfolioData.profile.email}`} className="text-sm font-medium bg-teal-500 hover:bg-teal-600 px-4 py-2 rounded-full transition-colors">
+                                Contact Me
+                            </a>
+                        </div>
+
+                        {/* Mobile Toggle */}
+                        <button className="md:hidden text-white" onClick={() => setMobileOpen(!mobileOpen)}>
+                            <i className={`fas ${mobileOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu */}
+                    {mobileOpen && (
+                        <div className="md:hidden bg-slate-800 absolute top-full left-0 w-full py-4 border-t border-slate-700">
+                            {navLinks.map((link) => (
+                                <a key={link.name} 
+                                   href={link.href} 
+                                   onClick={() => setMobileOpen(false)}
+                                   className="block px-6 py-3 text-white hover:bg-slate-700">
+                                    {link.name}
+                                </a>
+                            ))}
+                             <a href={`mailto:${portfolioData.profile.email}`} className="block px-6 py-3 text-teal-400 font-bold">
+                                Contact Me
+                            </a>
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        const Hero = () => {
+            return (
+                <section className="hero-bg min-h-screen flex items-center pt-20 relative overflow-hidden text-white">
+                    <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                        <div className="space-y-6">
+                            <div className="inline-block px-3 py-1 bg-teal-500/10 text-teal-400 text-sm font-semibold rounded-full border border-teal-500/20">
+                                Operations & Data Specialist
+                            </div>
+                            <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+                                Hi, I'm <br/>
+                                <span className="gradient-text">{portfolioData.profile.name}</span>
+                            </h1>
+                            <p className="text-xl text-slate-300 max-w-lg leading-relaxed">
+                                {portfolioData.profile.title} based in {portfolioData.profile.location}.
+                            </p>
+                            <p className="text-slate-400 max-w-lg">
+                                Translating business goals into actionable workflows, optimizing processes, and delivering high-impact projects through data.
+                            </p>
+                            
+                            <div className="flex flex-wrap gap-4 pt-4">
+                                <a href="#experience" className="px-6 py-3 bg-teal-500 hover:bg-teal-600 rounded-lg font-medium transition-all transform hover:-translate-y-1">
+                                    View Experience
+                                </a>
+                                <a href="#projects" className="px-6 py-3 bg-slate-800 border border-slate-700 hover:border-teal-500 rounded-lg font-medium transition-all">
+                                    Portfolio Projects
+                                </a>
+                                <a href={`mailto:${portfolioData.profile.email}`} className="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-all">
+                                    Contact Me
+                                </a>
+                            </div>
+
+                            <div className="flex gap-6 pt-4 text-slate-400">
+                                <a href={`mailto:${portfolioData.profile.email}`} className="hover:text-teal-400 transition-colors">
+                                    <i className="fas fa-envelope text-xl"></i>
+                                </a>
+                                <a href={`tel:${portfolioData.profile.phone}`} className="hover:text-teal-400 transition-colors">
+                                    <i className="fas fa-phone text-xl"></i>
+                                </a>
+                                <a href="#" className="hover:text-teal-400 transition-colors">
+                                    <i className="fab fa-linkedin text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div className="hidden md:flex justify-center relative">
+                            <div className="w-80 h-80 bg-teal-500/10 rounded-full blur-3xl absolute top-0 right-10 animate-pulse"></div>
+                            <div className="relative bg-slate-800/50 p-8 rounded-2xl border border-slate-700 backdrop-blur-sm shadow-2xl max-w-sm">
+                                <div className="space-y-4">
+                                    <div className="flex items-center gap-4 border-b border-slate-700 pb-4">
+                                        <div className="p-3 bg-teal-500/20 rounded-lg text-teal-400">
+                                            <i className="fas fa-database"></i>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold">Business Intelligence</h4>
+                                            <p className="text-xs text-slate-400">Data-driven decisions</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4 border-b border-slate-700 pb-4">
+                                        <div className="p-3 bg-blue-500/20 rounded-lg text-blue-400">
+                                            <i className="fas fa-users-cog"></i>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold">CRM Operations</h4>
+                                            <p className="text-xs text-slate-400">Lifecycle & Retention</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-3 bg-purple-500/20 rounded-lg text-purple-400">
+                                            <i className="fas fa-tasks"></i>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold">Project Management</h4>
+                                            <p className="text-xs text-slate-400">Agile & Efficient</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const About = () => {
+            return (
+                <section id="about" className="py-20 bg-white">
+                    <div className="container mx-auto px-6">
+                        <div className="max-w-3xl mx-auto text-center">
+                            <h2 className="text-3xl font-bold text-slate-900 mb-8">About Me</h2>
+                            <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                                {portfolioData.profile.about}
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Skills = () => {
+            return (
+                <section id="skills" className="py-20 bg-slate-50 border-t border-slate-200">
+                    <div className="container mx-auto px-6">
+                         <div className="flex flex-col items-center mb-12">
+                            <h2 className="text-3xl font-bold text-slate-900">Technical & Soft Skills</h2>
+                            <div className="w-20 h-1 bg-teal-500 mt-4 rounded"></div>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {/* Technical */}
+                            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <i className="fas fa-code text-teal-500"></i> Technical
+                                </h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {portfolioData.skills.technical.map(skill => (
+                                        <span key={skill} className="px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-md font-medium">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Soft Skills */}
+                            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <i className="fas fa-brain text-blue-500"></i> Soft Skills
+                                </h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {portfolioData.skills.soft.map(skill => (
+                                        <span key={skill} className="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-md font-medium">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                             {/* Languages */}
+                             <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <i className="fas fa-globe text-purple-500"></i> Languages
+                                </h3>
+                                <ul className="space-y-2">
+                                    {portfolioData.skills.languages.map(lang => (
+                                        <li key={lang} className="flex items-center gap
+-3 text-slate-700">
+                                            <i className="fas fa-check text-green-500 text-xs"></i> {lang}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Experience = () => {
+            return (
+                <section id="experience" className="py-20 bg-white">
+                    <div className="container mx-auto px-6">
+                        <div className="flex flex-col items-center mb-16">
+                            <h2 className="text-3xl font-bold text-slate-900">Professional Experience</h2>
+                            <div className="w-20 h-1 bg-teal-500 mt-4 rounded"></div>
+                        </div>
+
+                        <div className="max-w-4xl mx-auto space-y-12 relative before:absolute before:inset-0 before:ml-5 md:before:ml-[50%] before:-translate-x-px md:before:translate-x-0 before:h-full before:w-0.5 before:bg-slate-200 before:z-0">
+                            {portfolioData.experience.map((job, index) => (
+                                <div key={index} className="relative flex flex-col md:flex-row items-center justify-between md:justify-normal group">
+                                    
+                                    {/* Timeline Dot */}
+                                    <div className="absolute left-5 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-teal-500 border-4 border-white shadow z-10"></div>
+
+                                    {/* Date */}
+                                    <div className={`w-full md:w-[45%] pl-12 md:pl-0 mb-2 md:mb-0 ${index % 2 === 0 ? 'md:pr-8 md:text-right order-1' : 'md:pl-8 order-1 md:order-3'}`}>
+                                        <span className="inline-block px-3 py-1 rounded bg-slate-100 text-slate-600 text-sm font-semibold">
+                                            {job.period}
+                                        </span>
+                                    </div>
+
+                                    {/* Content Card */}
+                                    <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${index % 2 === 0 ? 'md:pl-8 order-3' : 'md:pr-8 md:text-right order-3 md:order-1'}`}>
+                                        <div className="bg-white p-6 rounded-xl border border-slate-200 hover:shadow-lg transition-shadow">
+                                            <h3 className="text-lg font-bold text-slate-900">{job.role}</h3>
+                                            <div className="text-teal-600 font-medium mb-1">{job.company}</div>
+                                            <div className="text-xs text-slate-500 mb-3"><i className="fas fa-map-marker-alt mr-1"></i> {job.location}</div>
+                                            <p className="text-slate-600 text-sm mb-3 italic">
+                                                {job.description}
+                                            </p>
+                                            <ul className={`space-y-1 text-sm text-slate-600 ${index % 2 !== 0 ? 'md:items-end' : ''}`}>
+                                                {job.highlights.map((hl, i) => (
+                                                    <li key={i} className="flex gap-2">
+                                                        <span className="text-teal-500 mt-1">•</span>
+                                                        <span className={index % 2 !== 0 ? 'md:text-right w-full' : 'text-left'}>{hl}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Projects = () => {
+            return (
+                <section id="projects" className="py-20 bg-slate-900 text-white">
+                    <div className="container mx-auto px-6">
+                        <div className="flex flex-col items-center mb-16">
+                            <h2 className="text-3xl font-bold">Portfolio Projects</h2>
+                            <p className="text-slate-400 mt-2">Key Initiatives & Results</p>
+                            <div className="w-20 h-1 bg-teal-500 mt-4 rounded"></div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-8">
+                            {portfolioData.projects.map((project, index) => (
+                                <div key={index} className="bg-slate-800 rounded-xl overflow-hidden hover:transform hover:-translate-y-1 transition-all duration-300 border border-slate-700">
+                                    <div className="p-6">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <h3 className="text-xl font-bold text-white">{project.title}</h3>
+                                            <span className="text-xs font-semibold px-2 py-1 bg-teal-900 text-teal-300 rounded uppercase tracking-wide">
+                                                {project.category}
+                                            </span>
+                                        </div>
+                                        
+                                        <div className="space-y-4">
+                                            <div>
+                                                <h4 className="text-sm font-bold text-teal-400 uppercase tracking-wider mb-1">Goal</h4>
+                                                <p className="text-slate-300 text-sm">{project.goal}</p>
+                                            </div>
+                                            <div>
+                                                <h4 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-1">Actions</h4>
+                                                <p className="text-slate-300 text-sm">{project.action}</p>
+                                            </div>
+                                            <div className="bg-slate-700/50 p-3 rounded-lg border-l-4 border-green-500">
+                                                <h4 className="text-sm font-bold text-green-400 uppercase tracking-wider mb-1">Outcome</h4>
+                                                <p className="text-white text-sm font-medium">{project.outcome}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const EducationAndAwards = () => {
+            return (
+                <section id="education" className="py-20 bg-slate-50">
+                    <div className="container mx-auto px-6">
+                        <div className="grid md:grid-cols-2 gap-12">
+                            
+                            {/* Education & Certs */}
+                            <div>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                                    <i className="fas fa-graduation-cap text-teal-600"></i> Education & Certifications
+                                </h3>
+                                <div className="space-y-6">
+                                    {portfolioData.education.map((edu, index) => (
+                                        <div key={index} className="bg-white p-5 rounded-lg border-l-4 border-teal-500 shadow-sm">
+                                            <h4 className="font-bold text-slate-800">{edu.degree}</h4>
+                                            <p className="text-slate-600">{edu.school}</p>
+                                            <p className="text-sm text-slate-400">{edu.year}</p>
+                                        </div>
+                                    ))}
+                                    
+                                    <div className="bg-white p-5 rounded-lg shadow-sm border border-slate-100">
+                                        <h4 className="font-bold text-slate-800 mb-3">Certifications</h4>
+                                        <ul className="space-y-2 text-sm text-slate-600">
+                                            {portfolioData.certifications.map((cert, i) => (
+                                                <li key={i} className="flex gap-2">
+                                                    <i className="fas fa-certificate text-teal-500 mt-1"></i> {cert}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Awards */}
+                            <div>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                                    <i className="fas fa-trophy text-yellow-500"></i> Recognition
+                                </h3>
+                                <div className="bg-slate-900 text-white p-8 rounded-2xl shadow-xl relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                                    <ul className="space-y-6 relative z-10">
+                                        {portfolioData.awards.map((award, index) => (
+                                            <li key={index} className="flex items-start gap-4">
+                                                <div className="mt-1 min-w-[24px]">
+                                                    <i className="fas fa-star text-yellow-400"></i>
+                                                </div>
+                                                <div>
+                                                    <span className="font-medium text-lg block mb-1">{award}</span>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-slate-900 text-white py-12 border-t border-slate-800">
+                    <div className="container mx-auto px-6 text-center">
+                        <h2 className="text-2xl font-bold mb-6">Let's Connect</h2>
+                        <div className="flex justify-center gap-8 mb-8">
+                            <a href={`mailto:${portfolioData.profile.email}`} className="flex flex-col items-center gap-2 group">
+                                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-teal-500 transition-colors">
+                                    <i className="fas fa-envelope text-xl"></i>
+                                </div>
+                                <span className="text-sm text-slate-400 group-hover:text-white">Email</span>
+                            </a>
+                            <a href={`tel:${portfolioData.profile.phone}`} className="flex flex-col items-center gap-2 group">
+                                <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-teal-500 transition-colors">
+                                    <i className="fas fa-phone text-xl"></i>
+                                </div>
+                                <span className="text-sm text-slate-400 group-hover:text-white">Phone</span>
+                            </a>
+                        </div>
+                        <p className="text-slate-500 text-sm">
+                            © {new Date().getFullYear()} {portfolioData.profile.name}. All Rights Reserved.
+                        </p>
+                    </div>
+                </footer>
+            );
+        };
+
+        const Portfolio = () => {
+            return (
+                <div className="antialiased">
+                    <Nav />
+                    <Hero />
+                    <About />
+                    <Skills />
+                    <Experience />
+                    <Projects />
+                    <EducationAndAwards />
+                    <Footer />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Portfolio />);
+    </script>
+</body>
+</html>
